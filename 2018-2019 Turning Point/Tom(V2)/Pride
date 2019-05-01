@@ -1,0 +1,305 @@
+vex::brain Brain;
+vex::competition Competition = vex::competition();
+vex::controller Controller = vex::controller();
+
+
+vex::motor puncher = vex::motor(vex::PORT10);
+
+vex::motor claw = vex::motor(vex::PORT13);
+
+vex::digital_out Pneu = vex::digital_out(Brain.ThreeWirePort.A);
+vex::limit LimitClaw = vex::limit(Brain.ThreeWirePort.H);
+vex::limit LimitAlignment = vex::limit(Brain.ThreeWirePort.B);
+
+    int LiftSpeed = 75; //85
+
+void PreAuton()
+{
+    Brain.timer(vex::timeUnits::sec) > 0.15;
+       clawOn = 1;
+            Pneu.set(clawOn);
+}
+
+       void ClawT()
+{
+
+    if(Controller.ButtonA.pressing())
+    {
+        claw.spin(vex::directionType::fwd,70,vex::velocityUnits::pct);
+        //Task.resume();
+    }
+    else if(Controller.ButtonB.pressing())
+    {
+        claw.spin(vex::directionType::rev,70,vex::velocityUnits::pct);
+        //Task.resume();
+    }
+    else
+    {
+         //Task.suspend();
+
+         claw.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+            //claw.stop(vex::brakeType::hold);
+    }
+}
+
+
+
+                            // *****LIFT*****\\
+//      Lift can go two direction and this is where the bot is allowed to pick up the cap and set it on the pole
+            // Lift with Alignment
+        void Alignment()
+{
+    if(LimitAlignment.pressing())
+        {
+            while(RightLift.rotation(vex::rotationUnits::deg) > 16
+                  && LeftLift.rotation(vex::rotationUnits::deg) <= 0)
+            {
+                RightLift.spin(vex::directionType::rev, 80, vex::velocityUnits::pct);
+            LeftLift.spin(vex::directionType::fwd, 80, vex::velocityUnits::pct);
+                Drive();
+                ClawT();
+            }
+                }
+               // else
+    if(Controller.ButtonR1.pressing())
+        {
+            RightLift.spin(vex::directionType::rev, LiftSpeed, vex::velocityUnits::pct);
+            LeftLift.spin(vex::directionType::fwd, LiftSpeed, vex::velocityUnits::pct);
+
+          // *******Fowards******
+        }
+
+         else if(Controller.ButtonR2.pressing())
+        {
+            RightLift.spin(vex::directionType::fwd, LiftSpeed, vex::velocityUnits::pct);
+            LeftLift.spin(vex::directionType::rev, LiftSpeed, vex::velocityUnits::pct);
+
+        }
+
+
+        else
+        {
+           RightLift.stop(vex::brakeType::hold);
+            LeftLift.stop(vex::brakeType::hold);
+        }
+
+}
+
+            /*            Puncher         */
+void Punchers()
+{
+     if(Controller.ButtonX.pressing())
+        {
+            puncher.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+        }
+    else
+    {
+        puncher.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+    }
+}
+
+
+double DegToInch(double inches) //inches to degrees
+{
+    double result = ((360 * inches)/(3.12*3.14)); //360 = 1.75  radius = 2.625+ torque of colsen wheels = 3.12
+    return result;
+}
+
+double InchToDegree(double degree)
+{
+    double res = (3.12*degree*3.14)/(2.07);//((3.12*3.14*degree)/(180)); //Turns to the exact degree you want it too
+    return res;
+}
+void MotorExell(double degree)
+{
+    RightFront.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+            RightMid.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+            RightBack.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+    LeftFront.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+            LeftMid.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+            LeftBack.startRotateFor(degree,vex::rotationUnits::deg,55,vex::velocityUnits::pct);
+}
+
+void SFoward(double inches) //slow foward
+{
+    double distance = DegToInch(inches);
+    MotorExell(distance);
+}
+
+void SBackward(double inches) //slow backward
+{
+    double distance = DegToInch(inches);
+    MotorExell(-distance);
+}
+
+
+// Using degrees !!!!!!!!!!!!!!!!!!!!
+void TurnRight(double deg)
+{
+    double distance = InchToDegree(deg);
+    RightMotor(-distance);
+    LeftMotor(distance);
+}
+
+void TurnLeft(double deg)
+{
+    double distance = InchToDegree(deg);
+    RightMotor(distance);
+    LeftMotor(-distance);
+}
+
+ void clawAuton(int num)
+  {
+     Brain.timer(vex::timeUnits::sec) > 0.15;
+       clawOn = num;
+            Pneu.set(clawOn);
+  }
+
+void AutonLift(int lift)
+{
+    RightLift.startRotateFor(lift,vex::rotationUnits::deg,((200^3)/5),vex::velocityUnits::pct);
+    LeftLift.startRotateFor(-lift,vex::rotationUnits::deg,((200^3)/5),vex::velocityUnits::pct);
+}
+
+void Time_s(double seconds)
+{
+    vex::task::sleep(seconds * 1000);
+}
+
+void AutonPuncher(double pullback)
+{
+        puncher.startRotateFor(pullback,vex::rotationUnits::deg,100,vex::velocityUnits::pct);
+}
+
+void ClawRotateAuton(int degrees)
+{
+   claw.startRotateTo(-degrees,vex::rotationUnits::deg,80,vex::velocityUnits::pct);
+}
+
+void Lift_Crotate(int lift, int degrees)  //Rotates the claw and use the lift at the same time
+{
+    RightLift.startRotateFor(lift,vex::rotationUnits::deg,((200^3)/5),vex::velocityUnits::pct);
+    LeftLift.startRotateFor(-lift,vex::rotationUnits::deg,((200^3)/5),vex::velocityUnits::pct);
+
+    claw.startRotateTo(-degrees,vex::rotationUnits::deg,80,vex::velocityUnits::pct);
+
+}
+
+/*
+void AutoLimit()  //test for using the limitswitch on auton
+{
+     if(LimitAlignment.pressing())
+        {
+
+                RightLift.startRotateFor(-700,vex::rotationUnits::deg,100,vex::velocityUnits::pct);
+        LeftLift.startRotateFor(700,vex::rotationUnits::deg,100,vex::velocityUnits::pct);
+
+        }
+}
+*/
+
+void Auton()
+{
+
+    //claw 1 is close and 0 is open
+    // for Time_s you tell is how many seconds you want it to run, if it is .1 this equal one milliseconds
+                          ////////////     RED    \\\\\\\\\\
+clawAuton(1);
+    Time_s(.1);
+    ClawRotateAuton(11); //sets the position of the claw
+    Time_s(.8);
+ OutTake(70);
+    Time_s(1);
+ intakeStop();
+    Time_s(.4);
+ TurnRight(88);
+    Time_s(1);
+ SFoward(12);
+    Time_s(1);
+ AutonLift(670); //goes down
+    Time_s(1.5);
+ AutonPuncher(300); //sets Puncher
+    Time_s(1);
+ Foward(32.5);
+    Time_s(1.5);
+ SBackward(5);
+    Time_s(1);
+ inttake(100); //intake to pick up first ball
+    Time_s(.5);
+intakeStop();
+    Time_s(.3);
+     //distance, power of intake
+Outtake_Foward(12.5, 60); // intakes just in case the ball isn't loaded and goes backward
+    Time_s(1.2);
+  intakeStop();
+    Time_s(.1);
+  //SBackward(13.1);
+   // Time_s(1);
+    clawAuton(0);  //opens claw
+    Time_s(.2);
+    TurnLeft(174.5);
+    Time_s(1.5);
+  SBackward(24); //picks up first cap
+    Time_s(1.5);
+  clawAuton(1); //closes claw and locks
+     Time_s(.5);
+  AutonLift(-100); //up
+    Time_s(1);
+  Foward(20);
+    Time_s(1);
+  TurnLeft(91.9);
+    Time_s(1);
+  Foward(18);
+    Time_s(1);
+    Lift_Crotate(-600, -184); // stacks first cap
+    Time_s(2);
+  clawAuton(0); //open
+  SBackward(9);
+    Time_s(1.5);
+    AutonLift(670);
+    Time_s(2);
+/*          Back up
+    //TurnRight(180);
+    //Time_s(1);
+    //TurnRight(40); //
+    //Time_s(1);
+    //SFoward(3);
+    //Time_s(1);
+    //AutonPuncher(400);
+    //Time_s(1);
+*/
+    TurnRight(122);
+    Time_s(1);
+    AutonLift(60); //second cap
+    Time_s(.5);
+    SBackward(19);
+    Time_s(1.3);
+    clawAuton(1); //closes claw
+    Time_s(.5);
+    AutonLift(100);
+    Time_s(1);
+    Foward(20);
+    Time_s(1);
+    TurnLeft(31);
+    Time_s(1);
+    SFoward(20);
+    Time_s(1);
+    AutonLift(-640); //stacks second cap
+    Time_s(2);
+    clawAuton(0);
+    Time_s(.5);
+     SBackward(10);
+    Time_s(1);
+    AutonLift(640); //puts down lift
+    Time_s(1);
+    Backward(28);
+    Time_s(1);
+    TurnRight(110);
+    Time_s(1);
+    AutonPuncher(600);
+    Time_s(1.2);
+    TurnLeft(8);
+    Time_s(.3);
+    Foward(45);
+    Time_s(1);
+}

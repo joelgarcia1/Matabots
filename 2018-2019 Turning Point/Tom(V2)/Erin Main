@@ -1,0 +1,44 @@
+#include "robot-config.h"
+
+void pre_auton( void ) {
+    clawAuton(1);
+}
+
+void autonomous( void )
+{
+        Auton();
+    }
+
+void usercontrol( void ) {
+
+  while (1)
+  {
+      // ButtonAuton();
+    Drive();
+
+    //Lift();
+      ClawT();
+   Punchers();
+      Alignment();
+
+      //ClawLim();
+      //clawAuton();
+
+    vex::task::sleep(20);
+
+  }
+}
+
+int main() {
+    pre_auton();
+
+    //Set up callbacks for autonomous and driver control periods.
+    Competition.autonomous( autonomous );
+    Competition.drivercontrol( usercontrol );
+
+    //Prevent main from exiting with an infinite loop.
+    while(1) {
+      vex::task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
+    }
+
+}
