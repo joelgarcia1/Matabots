@@ -1,12 +1,10 @@
 #include "vex.h"
-#include "vex_units.h"
-#include <cortex_layout.h>
-//#include "driver.h"
 
 using namespace vex;
 
 int Rval = 0, Lval = 0;
 
+// Driver Control
 void driver_control()
 {
   Lift.setVelocity(100, velocityUnits::rpm);
@@ -25,7 +23,7 @@ void driver_control()
     }
 */
   
-  // Right Drive
+  // Right Drive Control
   if(master.Axis2.value() != 0)
     {
       Rval = master.Axis2.value() * .787; // (100/127)
@@ -44,7 +42,7 @@ void driver_control()
       //R5.stop();
     }
 
-    // Left Drive
+    // Left Drive Control
     if(master.Axis3.value() != 0)
     {
       Lval = master.Axis3.value()  * .787; // (100/127)
@@ -63,7 +61,7 @@ void driver_control()
       //L5.stop();
     }
 
-    // Intakes
+    // Intake Control
     if(master.ButtonR2.pressing())
     {
       rightIntake.spin(directionType::fwd, 200, velocityUnits::rpm);

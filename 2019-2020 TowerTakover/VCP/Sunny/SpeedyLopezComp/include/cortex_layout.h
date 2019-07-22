@@ -1,5 +1,4 @@
 #pragma once
-
 #include "vex.h"
 
 using namespace vex;
@@ -23,14 +22,18 @@ extern motor L4;
 // Lift Motor 
 extern motor Lift;
 
-// Intakes
+// Intake Motors
 extern motor rightIntake;
 extern motor leftIntake;
 
-// Arms
+// Arm Motors
 extern motor rightArm;
 extern motor leftArm;
 
 extern controller master;
 
+// Setup Function
 extern void setup();
+
+// Resets Motors to 0
+extern void reset_motors();

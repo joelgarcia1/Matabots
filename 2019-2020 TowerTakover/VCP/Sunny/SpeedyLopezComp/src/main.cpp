@@ -7,6 +7,8 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
+#include "vex_drivetrain.h"
+#include <driver.h>
 
 using namespace vex;
 
@@ -30,6 +32,7 @@ vex::competition Competition;
 void pre_auton( void ) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+  setup();
   
 }
 
@@ -67,10 +70,8 @@ void usercontrol( void ) {
     // Each time through the loop your program should update motor + servo 
     // values based on feedback from the joysticks.
 
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to 
-    // update your motors, etc.
-    // ........................................................................
+    // Driver Control
+    driver_control();
  
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }

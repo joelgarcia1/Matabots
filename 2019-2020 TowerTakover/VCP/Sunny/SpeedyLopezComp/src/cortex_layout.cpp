@@ -1,5 +1,4 @@
 #include "vex.h"
-//#include "motor.h"
 
 using namespace vex;
 
@@ -34,8 +33,32 @@ motor leftArm = motor(PORT7, true);
 // Controller
 controller master = controller(controller());
 
+// Function will run before Autonomous and Before UserControl
 void setup()
 {
+  reset_motors();
   rightArm.setBrake(brakeType::brake);
   leftArm.setBrake(brakeType::brake);
+}
+
+// Resets All Motor Values to 0
+void reset_motors()
+{
+  R1.resetRotation();
+  R2.resetRotation();
+  R3.resetRotation();
+  R4.resetRotation();
+  
+  L1.resetRotation();
+  L2.resetRotation();
+  L3.resetRotation();
+  L4.resetRotation();
+
+  Lift.resetRotation();
+
+  rightIntake.resetRotation();
+  leftIntake.resetRotation();
+
+  rightArm.resetRotation();
+  leftArm.resetRotation();
 }
