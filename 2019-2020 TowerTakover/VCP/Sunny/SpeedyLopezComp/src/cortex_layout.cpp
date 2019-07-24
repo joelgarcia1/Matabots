@@ -6,18 +6,18 @@ using namespace vex;
 brain Brain;
 
 // Right Drive
-motor R1 = motor(PORT1, true);
-motor R2 = motor(PORT2, false);
-motor R3 = motor(PORT3, true);
-motor R4 = motor(PORT4, false);
-//motor R5 = motor(PORT5, true);
+motor R1 = motor(PORT1, false );
+motor R2 = motor(PORT2, true);
+motor R3 = motor(PORT3, false );
+motor R4 = motor(PORT4, true);
+//motor R5 = motor(PORT5, false );
 
 // Left Drive
-motor L1 = motor(PORT13, false);
-motor L2 = motor(PORT14, true);
-motor L3 = motor(PORT15, false);
-motor L4 = motor(PORT17, true);
-//motor L5 = motor(PORT15, false);
+motor L1 = motor(PORT13, true);
+motor L2 = motor(PORT14, false );
+motor L3 = motor(PORT15, true);
+motor L4 = motor(PORT17, false );
+//motor L5 = motor(PORT15, true);
 
 // Lift Motor
 motor Lift = motor(PORT9, true);
@@ -36,9 +36,24 @@ controller master = controller(controller());
 // Function will run before Autonomous and Before UserControl
 void setup()
 {
+  Brake();
   reset_motors();
   rightArm.setBrake(brakeType::brake);
   leftArm.setBrake(brakeType::brake);
+}
+
+// Add Brake to Drive
+void Brake()
+{
+  R1.setBrake(brakeType::brake);
+  R2.setBrake(brakeType::brake);
+  R3.setBrake(brakeType::brake);
+  R4.setBrake(brakeType::brake);
+  
+  L1.setBrake(brakeType::brake);
+  L2.setBrake(brakeType::brake);
+  L3.setBrake(brakeType::brake);
+  L4.setBrake(brakeType::brake);
 }
 
 // Resets All Motor Values to 0

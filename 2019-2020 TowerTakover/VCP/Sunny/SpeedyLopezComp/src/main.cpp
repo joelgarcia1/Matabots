@@ -8,6 +8,7 @@
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
 #include "vex_drivetrain.h"
+#include <auton_strats.h>
 #include <driver.h>
 
 using namespace vex;
@@ -72,7 +73,10 @@ void usercontrol( void ) {
 
     // Driver Control
     driver_control();
- 
+    if(master.ButtonB.pressing())
+    {
+      testRightTurn();
+    }
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
 }

@@ -35,5 +35,8 @@ extern controller master;
 // Setup Function
 extern void setup();
 
+// Brake Chassis
+extern void Brake();
+
 // Resets Motors to 0
 extern void reset_motors();

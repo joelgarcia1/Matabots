@@ -5,7 +5,7 @@
 
 using namespace vex;
 
-const double chassis_diameter = 0; // Diameter of Chassis (in inches)
+const double chassis_diameter = 12; // Diameter of Chassis (in inches)
 const double pi = 22/7; // 3.14159...
 const double chassis_circum = chassis_diameter * pi; // Circumference of Chassis (in inches)
 
@@ -33,25 +33,29 @@ void LMove(double degrees, double power)
   // NOTE: For moving backwards, enter negative inches & negative pow
 void MoveForward(double inch, double pow)
 {
+  reset_motors();
   double degrees = InchToDeg(inch); // Convert travel distance from inches to degrees
+  RMove(degrees, pow);
+  LMove(degrees, pow);  // Move Forward till degrees
   while((L1.rotation(rotationUnits::deg) < degrees) && (R1.rotation(rotationUnits::deg) < degrees))
   {
-    RMove(degrees, pow);
-    LMove(degrees, pow);  // Move Forward till degrees
     task::sleep(2);
   }
+  RMove(0, 0);
+  LMove(0,0);
 }
 
 // Turns Chassis to the right for desired amount of degrees at desired power
 void TurnRight(double rDeg, double pow)
 {
+  reset_motors();
   /* Convert degrees robot needs to turn to distance wheels need to travel in degrees */
   double targetIn = (rDeg) * (chassis_circum/360); // Target distance (in inches)
   double targetDeg = InchToDeg(targetIn); // Target distance (in degrees)
+  RMove(-targetDeg, -pow);
+  LMove(targetDeg, pow);  // Turn right till targetDeg
   while((L1.rotation(rotationUnits::deg) < targetDeg) && (R1.rotation(rotationUnits::deg) > -targetDeg))
   {
-    RMove(-targetDeg, -pow);
-    LMove(targetDeg, pow);  // Turn right till targetDeg
     task::sleep(2);
   }
 }
@@ -59,13 +63,14 @@ void TurnRight(double rDeg, double pow)
 // Turns Chassis to the left for desired amount of degrees at desired power
 void TurnLeft(double rDeg, double pow)
 {
+  reset_motors();
   /* Convert degrees robot needs to turn to distance wheels need to travel in degrees */
   double targetIn = (rDeg) * (chassis_circum/360); // Target distance (in inches)
   double targetDeg = InchToDeg(targetIn); // Target distance (in degrees)
+  RMove(targetDeg, pow);
+  LMove(-targetDeg, -pow);  // Turn left till targetDeg
   while((L1.rotation(rotationUnits::deg) > -targetDeg) && (R1.rotation(rotationUnits::deg) < targetDeg))
   {
-    RMove(targetDeg, pow);
-    LMove(-targetDeg, -pow);  // Turn left till targetDeg
     task::sleep(2);
   }
 }

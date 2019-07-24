@@ -24,3 +24,4 @@
 #include "driver.h"
 #include "chassis_methods.h"
 #include "calculation_methods.h"
+#include "auton_strats.h"
