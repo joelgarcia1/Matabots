@@ -3,30 +3,17 @@
 using namespace vex;
 
 int Rval = 0, Lval = 0;
+const int DEADZONE = 20;
 
 // Driver Control
 void driver_control()
 {
   Lift.setVelocity(100, velocityUnits::rpm);
-  /*
-    if(master.ButtonR2.pressing())
-    {
-      testMotor.spin(directionType::fwd, 50, velocityUnits::rpm);
-    }
-    else if(master.ButtonR1.pressing())
-    {
-      testMotor.spin(directionType::rev, 50, velocityUnits::rpm);
-    }
-    else
-    {
-      testMotor.stop();
-    }
-*/
   
   // Right Drive Control
-  if(master.Axis2.value() != 0)
+  if(abs(master.Axis2.value()) > DEADZONE)
     {
-      Rval = master.Axis2.value() * .787; // (100/127)
+      Rval = master.Axis2.value();// * .787; // (100/127)
       R1.spin(directionType::fwd, Rval, percentUnits::pct);
       R2.spin(directionType::fwd, Rval, percentUnits::pct);
       R3.spin(directionType::fwd, Rval, percentUnits::pct);
@@ -43,9 +30,9 @@ void driver_control()
     }
 
     // Left Drive Control
-    if(master.Axis3.value() != 0)
+    if(abs(master.Axis3.value()) > DEADZONE)
     {
-      Lval = master.Axis3.value()  * .787; // (100/127)
+      Lval = master.Axis3.value();// * .787; // (100/127)
       L1.spin(directionType::fwd, Lval, percentUnits::pct);
       L2.spin(directionType::fwd, Lval, percentUnits::pct);
       L3.spin(directionType::fwd, Lval, percentUnits::pct);
@@ -81,13 +68,13 @@ void driver_control()
     // Arm Control
     if(master.ButtonL1.pressing())
     {
-      rightArm.spin(directionType::fwd, 100, velocityUnits::rpm);
-      leftArm.spin(directionType::fwd, 100, velocityUnits::rpm);
+      rightArm.spin(directionType::fwd, 200, velocityUnits::rpm);
+      leftArm.spin(directionType::fwd, 200, velocityUnits::rpm);
     }
     else if(master.ButtonL2.pressing())
     {
-      rightArm.spin(directionType::rev, 100, velocityUnits::rpm);
-      leftArm.spin(directionType::rev, 100, velocityUnits::rpm);
+      rightArm.spin(directionType::rev, 200, velocityUnits::rpm);
+      leftArm.spin(directionType::rev, 200, velocityUnits::rpm);
     }
     else
     {

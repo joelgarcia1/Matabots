@@ -38,5 +38,8 @@ extern void setup();
 // Brake Chassis
 extern void Brake();
 
+// Unbrake Chassis
+extern void UnBrake();
+
 // Resets Motors to 0
 extern void reset_motors();
