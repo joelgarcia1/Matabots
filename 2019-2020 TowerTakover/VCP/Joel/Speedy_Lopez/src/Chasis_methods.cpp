@@ -209,10 +209,10 @@ if(Controller.Axis2.value())//10 = deadzone
 
 }
 */
-/*
+
 void Gyro_Move(double degree)
 {
-   while(1)
+   while(true)
   {
 
 
@@ -226,13 +226,13 @@ void Gyro_Move(double degree)
   Left2.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
   Left3.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
   Left4.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
+ 
 
   Right1.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);
   Right2.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);
   Right3.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);
   Right4.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);
+
   }
   
    else if(Gyro.value(vex::rotationUnits::deg) >= degree )
@@ -241,13 +241,13 @@ void Gyro_Move(double degree)
   Left2.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);
   Left3.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);
   Left4.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);
+
 
   Right1.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
   Right2.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
   Right3.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
   Right4.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
+
      }
      else 
       {
@@ -255,13 +255,13 @@ void Gyro_Move(double degree)
   Left2.stop(vex::brakeType::brake);
   Left3.stop(vex::brakeType::brake);
   Left4.stop(vex::brakeType::brake);
-  Left5.stop(vex::brakeType::brake);
+  
 
   Right1.stop(vex::brakeType::brake);
   Right2.stop(vex::brakeType::brake);
   Right3.stop(vex::brakeType::brake);
   Right4.stop(vex::brakeType::brake);
-  Right5.stop(vex::brakeType::brake);
+ 
   Gyro.startCalibration();
  
      }
@@ -269,21 +269,6 @@ void Gyro_Move(double degree)
 //}
 
 }
-*/
 
-void Foward()
-{
 
-  Left1.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
-  Left2.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
-  Left3.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
-  Left4.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
-  
-
-  Right1.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
-  Right2.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
-  Right3.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
-  Right4.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);
-  
-}
 

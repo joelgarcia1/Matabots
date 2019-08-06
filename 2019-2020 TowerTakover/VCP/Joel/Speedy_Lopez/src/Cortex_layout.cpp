@@ -17,7 +17,7 @@ vex::motor Right3(vex::PORT3);
 vex::motor Right4(vex::PORT4, true);
 
 
-vex::motor Left1 (vex::PORT20,true );
+vex::motor Left1 (vex::PORT13,true );
 vex::motor Left2 (vex::PORT14);
 vex::motor Left3 (vex::PORT15, true);
 vex::motor Left4 (vex::PORT17);

@@ -7,6 +7,7 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
+#include "vex_units.h"
 
 using namespace vex;
 
@@ -65,8 +66,9 @@ void usercontrol(  ) {
   // User control code here, inside the loop
   while (true) {
 
-      //Brain.Screen.clearScreen();
-    //Brain.Screen.printAt( 1,  40, "rotation %f degrees: ", Gyro.value(vex::rotationUnits::deg));
+    Brain.Screen.clearScreen();
+    Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
+    Brain.Screen.printAt( 1,  80, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
    Drive();
    Arms();
    lift();
