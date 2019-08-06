@@ -9,7 +9,10 @@
 #include "vex.h"
 #include "vex_drivetrain.h"
 #include <auton_strats.h>
+#include <chassis_methods.h>
+#include <cortex_layout.h>
 #include <driver.h>
+#include <manipulator_methods.h>
 
 using namespace vex;
 
@@ -48,6 +51,22 @@ void pre_auton( void ) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous( void ) {
+  Brake();
+  leftArm.startRotateTo(-100, rotationUnits::deg);
+  rightArm.rotateTo(-100, rotationUnits::deg);
+
+  IntakeOn(200);
+  MoveForward(23, 50);
+  task::sleep(500);
+
+  MoveForward(8, 50);
+  task::sleep(500);
+
+  MoveForward(10, 50);
+  task::sleep(2500);
+  IntakeOff();
+
+
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
@@ -66,6 +85,7 @@ void autonomous( void ) {
 
 void usercontrol( void ) {
   // User control code here, inside the loop
+  //UnBrake();
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo 
@@ -73,10 +93,6 @@ void usercontrol( void ) {
 
     // Driver Control
     driver_control();
-    if(master.ButtonB.pressing())
-    {
-      testRightTurn();
-    }
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
   }
 }

@@ -25,3 +25,4 @@
 #include "chassis_methods.h"
 #include "calculation_methods.h"
 #include "auton_strats.h"
+#include "manipulator_methods.h"

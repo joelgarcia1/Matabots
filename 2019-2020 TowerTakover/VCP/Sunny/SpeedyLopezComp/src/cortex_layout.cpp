@@ -1,4 +1,5 @@
 #include "vex.h"
+#include <cortex_layout.h>
 
 using namespace vex;
 
@@ -23,8 +24,8 @@ motor L4 = motor(PORT17, false );
 motor Lift = motor(PORT9, true);
 
 // Intakes
-motor rightIntake = motor(PORT18, true);
-motor leftIntake = motor(PORT19, false);
+motor rightIntake = motor(PORT20, false);
+motor leftIntake = motor(PORT19, true);
 
 // Arms
 motor rightArm = motor(PORT6, false);
@@ -54,6 +55,20 @@ void Brake()
   L2.setBrake(brakeType::brake);
   L3.setBrake(brakeType::brake);
   L4.setBrake(brakeType::brake);
+}
+
+// Remove Brake from Drive
+void UnBrake()
+{
+  R1.setBrake(brakeType::coast);
+  R2.setBrake(brakeType::coast);
+  R3.setBrake(brakeType::coast);
+  R4.setBrake(brakeType::coast);
+  
+  L1.setBrake(brakeType::coast);
+  L2.setBrake(brakeType::coast);
+  L3.setBrake(brakeType::coast);
+  L4.setBrake(brakeType::coast);
 }
 
 // Resets All Motor Values to 0
