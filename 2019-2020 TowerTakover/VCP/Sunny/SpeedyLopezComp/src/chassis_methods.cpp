@@ -12,20 +12,20 @@ const double chassis_circum = chassis_diameter * pi; // Circumference of Chassis
 // Moves the Motors on the Right Side of the Chassis for desired distance at desired power
 void RMove(double degrees, double power)  // value of power should range from 20 to 100
 {
-  R1.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  R2.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  R3.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  R4.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Right1.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Right2.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Right3.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Right4.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
   //R5.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
 }
 
 // Moves the Motors on the Left Side of the Chassis for desired distance at desired power
 void LMove(double degrees, double power)
 {
-  L1.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  L2.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  L3.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
-  L4.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Left1.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Left2.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Left3.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
+  Left4.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
   //L5.startRotateTo(degrees, rotationUnits::deg, power, velocityUnits::pct);
 }
 
@@ -33,11 +33,11 @@ void LMove(double degrees, double power)
   // NOTE: For moving backwards, enter negative inches & negative pow
 void MoveForward(double inch, double pow)
 {
-  reset_motors();
+  reset_Enc();
   double degrees = InchToDeg(inch); // Convert travel distance from inches to degrees
   RMove(degrees, pow);
   LMove(degrees, pow);  // Move Forward till degrees
-  while((L1.rotation(rotationUnits::deg) < degrees) && (R1.rotation(rotationUnits::deg) < degrees))
+  while((Left1.rotation(rotationUnits::deg) < degrees) && (Right1.rotation(rotationUnits::deg) < degrees))
   {
     task::sleep(2);
   }
@@ -48,13 +48,13 @@ void MoveForward(double inch, double pow)
 // Turns Chassis to the right for desired amount of degrees at desired power
 void TurnRight(double rDeg, double pow)
 {
-  reset_motors();
+  reset_Enc();
   /* Convert degrees robot needs to turn to distance wheels need to travel in degrees */
   double targetIn = (rDeg) * (chassis_circum/360); // Target distance (in inches)
   double targetDeg = InchToDeg(targetIn); // Target distance (in degrees)
   RMove(-targetDeg, -pow);
   LMove(targetDeg, pow);  // Turn right till targetDeg
-  while((L1.rotation(rotationUnits::deg) < targetDeg) && (R1.rotation(rotationUnits::deg) > -targetDeg))
+  while((Left1.rotation(rotationUnits::deg) < targetDeg) && (Right1.rotation(rotationUnits::deg) > -targetDeg))
   {
     task::sleep(2);
   }
@@ -63,13 +63,13 @@ void TurnRight(double rDeg, double pow)
 // Turns Chassis to the left for desired amount of degrees at desired power
 void TurnLeft(double rDeg, double pow)
 {
-  reset_motors();
+  reset_Enc();
   /* Convert degrees robot needs to turn to distance wheels need to travel in degrees */
   double targetIn = (rDeg) * (chassis_circum/360); // Target distance (in inches)
   double targetDeg = InchToDeg(targetIn); // Target distance (in degrees)
   RMove(targetDeg, pow);
   LMove(-targetDeg, -pow);  // Turn left till targetDeg
-  while((L1.rotation(rotationUnits::deg) > -targetDeg) && (R1.rotation(rotationUnits::deg) < targetDeg))
+  while((Left1.rotation(rotationUnits::deg) > -targetDeg) && (Right1.rotation(rotationUnits::deg) < targetDeg))
   {
     task::sleep(2);
   }

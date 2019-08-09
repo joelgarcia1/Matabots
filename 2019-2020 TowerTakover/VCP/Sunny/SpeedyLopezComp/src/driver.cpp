@@ -14,38 +14,38 @@ void driver_control()
   if(abs(master.Axis2.value()) > DEADZONE)
     {
       Rval = master.Axis2.value();// * .787; // (100/127)
-      R1.spin(directionType::fwd, Rval, percentUnits::pct);
-      R2.spin(directionType::fwd, Rval, percentUnits::pct);
-      R3.spin(directionType::fwd, Rval, percentUnits::pct);
-      R4.spin(directionType::fwd, Rval, percentUnits::pct);
-      //R5.spin(directionType::fwd, Rval, percentUnits::pct);
+      Right1.spin(directionType::fwd, Rval, percentUnits::pct);
+      Right2.spin(directionType::fwd, Rval, percentUnits::pct);
+      Right3.spin(directionType::fwd, Rval, percentUnits::pct);
+      Right4.spin(directionType::fwd, Rval, percentUnits::pct);
+      //Right5.spin(directionType::fwd, Rval, percentUnits::pct);
     }
     else
     {
-      R1.stop();
-      R2.stop();
-      R3.stop();
-      R4.stop();
-      //R5.stop();
+      Right1.stop();
+      Right2.stop();
+      Right3.stop();
+      Right4.stop();
+      //Right5.stop();
     }
 
     // Left Drive Control
     if(abs(master.Axis3.value()) > DEADZONE)
     {
       Lval = master.Axis3.value();// * .787; // (100/127)
-      L1.spin(directionType::fwd, Lval, percentUnits::pct);
-      L2.spin(directionType::fwd, Lval, percentUnits::pct);
-      L3.spin(directionType::fwd, Lval, percentUnits::pct);
-      L4.spin(directionType::fwd, Lval, percentUnits::pct);
-      //L5.spin(directionType::fwd, Lval, percentUnits::pct);
+      Left1.spin(directionType::fwd, Lval, percentUnits::pct);
+      Left2.spin(directionType::fwd, Lval, percentUnits::pct);
+      Left3.spin(directionType::fwd, Lval, percentUnits::pct);
+      Left4.spin(directionType::fwd, Lval, percentUnits::pct);
+      //Left5.spin(directionType::fwd, Lval, percentUnits::pct);
     }
     else
     {
-      L1.stop();
-      L2.stop();
-      L3.stop();
-      L4.stop();
-      //L5.stop();
+      Left1.stop();
+      Left2.stop();
+      Left3.stop();
+      Left4.stop();
+      //Left5.stop();
     }
 
     // Intake Control

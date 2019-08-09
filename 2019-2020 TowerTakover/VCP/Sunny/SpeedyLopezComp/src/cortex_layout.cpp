@@ -1,4 +1,5 @@
 #include "vex.h"
+#include <PID.h>
 #include <cortex_layout.h>
 
 using namespace vex;
@@ -7,17 +8,17 @@ using namespace vex;
 brain Brain;
 
 // Right Drive
-motor R1 = motor(PORT1, false );
-motor R2 = motor(PORT2, true);
-motor R3 = motor(PORT3, false );
-motor R4 = motor(PORT4, true);
+motor Right1 = motor(PORT1, false );
+motor Right2 = motor(PORT2, true);
+motor Right3 = motor(PORT3, false );
+motor Right4 = motor(PORT4, true);
 //motor R5 = motor(PORT5, false );
 
 // Left Drive
-motor L1 = motor(PORT13, true);
-motor L2 = motor(PORT14, false );
-motor L3 = motor(PORT15, true);
-motor L4 = motor(PORT17, false );
+motor Left1 = motor(PORT13, true);
+motor Left2 = motor(PORT14, false );
+motor Left3 = motor(PORT15, true);
+motor Left4 = motor(PORT17, false );
 //motor L5 = motor(PORT15, true);
 
 // Lift Motor
@@ -25,7 +26,7 @@ motor Lift = motor(PORT9, true);
 
 // Intakes
 motor rightIntake = motor(PORT20, false);
-motor leftIntake = motor(PORT19, true);
+motor leftIntake = motor(PORT18, true);
 
 // Arms
 motor rightArm = motor(PORT6, false);
@@ -38,7 +39,7 @@ controller master = controller(controller());
 void setup()
 {
   Brake();
-  reset_motors();
+  reset_Enc();
   rightArm.setBrake(brakeType::brake);
   leftArm.setBrake(brakeType::brake);
 }
@@ -46,43 +47,43 @@ void setup()
 // Add Brake to Drive
 void Brake()
 {
-  R1.setBrake(brakeType::brake);
-  R2.setBrake(brakeType::brake);
-  R3.setBrake(brakeType::brake);
-  R4.setBrake(brakeType::brake);
+  Right1.setBrake(brakeType::brake);
+  Right2.setBrake(brakeType::brake);
+  Right3.setBrake(brakeType::brake);
+  Right4.setBrake(brakeType::brake);
   
-  L1.setBrake(brakeType::brake);
-  L2.setBrake(brakeType::brake);
-  L3.setBrake(brakeType::brake);
-  L4.setBrake(brakeType::brake);
+  Left1.setBrake(brakeType::brake);
+  Left2.setBrake(brakeType::brake);
+  Left3.setBrake(brakeType::brake);
+  Left4.setBrake(brakeType::brake);
 }
 
 // Remove Brake from Drive
 void UnBrake()
 {
-  R1.setBrake(brakeType::coast);
-  R2.setBrake(brakeType::coast);
-  R3.setBrake(brakeType::coast);
-  R4.setBrake(brakeType::coast);
+  Right1.setBrake(brakeType::coast);
+  Right2.setBrake(brakeType::coast);
+  Right3.setBrake(brakeType::coast);
+  Right4.setBrake(brakeType::coast);
   
-  L1.setBrake(brakeType::coast);
-  L2.setBrake(brakeType::coast);
-  L3.setBrake(brakeType::coast);
-  L4.setBrake(brakeType::coast);
+  Left1.setBrake(brakeType::coast);
+  Left2.setBrake(brakeType::coast);
+  Left3.setBrake(brakeType::coast);
+  Left4.setBrake(brakeType::coast);
 }
 
 // Resets All Motor Values to 0
-void reset_motors()
+void reset_Enc()
 {
-  R1.resetRotation();
-  R2.resetRotation();
-  R3.resetRotation();
-  R4.resetRotation();
+  Right1.resetRotation();
+  Right2.resetRotation();
+  Right3.resetRotation();
+  Right4.resetRotation();
   
-  L1.resetRotation();
-  L2.resetRotation();
-  L3.resetRotation();
-  L4.resetRotation();
+  Left1.resetRotation();
+  Left2.resetRotation();
+  Left3.resetRotation();
+  Left4.resetRotation();
 
   Lift.resetRotation();
 
@@ -92,3 +93,4 @@ void reset_motors()
   rightArm.resetRotation();
   leftArm.resetRotation();
 }
+

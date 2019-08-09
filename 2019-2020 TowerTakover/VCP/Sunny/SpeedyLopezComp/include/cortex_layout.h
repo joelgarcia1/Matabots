@@ -1,22 +1,23 @@
 #pragma once
 #include "vex.h"
+#include <PID.h>
 
 using namespace vex;
 
 extern brain Brain;
 
 // Right Drive
-extern motor R1;
-extern motor R2;
-extern motor R3;
-extern motor R4;
+extern motor Right1;
+extern motor Right2;
+extern motor Right3;
+extern motor Right4;
 //extern motor R5;
 
 // Left Drive
-extern motor L1;
-extern motor L2;
-extern motor L3;
-extern motor L4;
+extern motor Left1;
+extern motor Left2;
+extern motor Left3;
+extern motor Left4;
 //extern motor L5;
 
 // Lift Motor 
@@ -42,4 +43,4 @@ extern void Brake();
 extern void UnBrake();
 
 // Resets Motors to 0
-extern void reset_motors();
+extern void reset_Enc();
