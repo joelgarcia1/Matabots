@@ -6,5 +6,5 @@
 
 void Auton_Strat()
 {
-  
+  PI_straight(12);
 }

@@ -8,6 +8,7 @@
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
 #include "vex_units.h"
+#include <PID.h>
 
 using namespace vex;
 
@@ -69,17 +70,20 @@ void usercontrol(  ) {
     Brain.Screen.clearScreen();
     Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
     Brain.Screen.printAt( 1,  80, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
-   Drive();
-   Arms();
-   lift();
-   /*if(Controller.ButtonA.pressing())
+   //Drive();
+   //Arms();
+   //lift();
+
+   if(Controller.ButtonY.pressing())
    {
-   Foward();
-   vex::task::sleep(1000);
-   Gyro_Move();
+     PI_straight(12);
+   //Foward();
+   //vex::task::sleep(1000);
+   //Gyro_Move();
 
   }
-  */
+       Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
+
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo 
     // values based on feedback from the joysticks.
