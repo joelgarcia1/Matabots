@@ -11,16 +11,16 @@ vex::competition Competition;
 
 
 vex:: controller Controller = vex::controller(); 
-vex::motor Right1(vex::PORT1);
-vex::motor Right2(vex::PORT2, true);
-vex::motor Right3(vex::PORT3);
-vex::motor Right4(vex::PORT4, true);
+vex::motor Right1(vex::PORT16,true);
+vex::motor Right2(vex::PORT14);
+vex::motor Right3(vex::PORT17,true);
+vex::motor Right4(vex::PORT20);
 
 
-vex::motor Left1 (vex::PORT13,true );
-vex::motor Left2 (vex::PORT14);
-vex::motor Left3 (vex::PORT15, true);
-vex::motor Left4 (vex::PORT17);
+vex::motor Left1 (vex::PORT1);
+vex::motor Left2 (vex::PORT2,true);
+vex::motor Left3 (vex::PORT3);
+vex::motor Left4 (vex::PORT5, true);
 
 vex::motor R_arms(vex::PORT6);
 vex::motor L_arms(vex::PORT7, true);

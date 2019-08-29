@@ -70,11 +70,11 @@ void usercontrol(  ) {
     Brain.Screen.clearScreen();
     Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
     Brain.Screen.printAt( 1,  80, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
-   //Drive();
+   Drive();
    //Arms();
    //lift();
 
-   if(Controller.ButtonY.pressing())
+   /*if(Controller.ButtonY.pressing())
    {
      PI_straight(12);
    //Foward();
@@ -82,6 +82,7 @@ void usercontrol(  ) {
    //Gyro_Move();
 
   }
+  */
        Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
 
     // This is the main execution loop for the user control program.
