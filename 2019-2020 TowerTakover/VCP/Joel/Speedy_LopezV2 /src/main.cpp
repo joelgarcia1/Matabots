@@ -83,7 +83,7 @@ void usercontrol(  ) {
 
   }
   */
-       Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
+     
 
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo 

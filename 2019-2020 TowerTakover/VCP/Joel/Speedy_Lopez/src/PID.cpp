@@ -2,6 +2,7 @@
 #include "vex_triport.h"
 #include "vex_units.h"
 #include <Cortex_layout.h>
+#include <PID.h>
 
 
 
@@ -30,7 +31,7 @@ double previous_tL; //previous time
 double previous_tR;
 
 double delta_t; // current time - previous time
-double current_enc = 0;
+
 //PI for Straight 
 //if(1) == pi & if(0) == PID
 //PID for turning 
@@ -73,7 +74,7 @@ void move_baseL(double speed)
   Left3.spin(vex::directionType::rev, speed, vex::velocityUnits::rpm );
   Left4.spin(vex::directionType::rev, speed, vex::velocityUnits::rpm );
 }
-
+double current_enc = (Left1.rotation(vex::rotationUnits::rev)+ Right1.rotation(vex::rotationUnits::rev));
 //void Current_Enc ()
 //{
 //Right1.rotateFor(0,vex::rotationUnits::deg);
@@ -103,8 +104,8 @@ void PI_straight(double target_i) //target set too
   delta_t = double(current_t - previous_tL);
   
 
-  errorL = InchPerTicks(target) - current_enc; //current enc 
-  errorR = (target - target_i);
+  errorL = InchPerTicks(target) - InchPerTicks(current_enc); //current enc 
+  errorR = (InchPerTicks(target) - InchPerTicks(current_enc));
 
   //cum_errorL += errorL * delta_tL;
   //cum_errorR += errorR * delta_tR;
