@@ -25,7 +25,7 @@ vex::motor Left4 (vex::PORT17,true);
 vex::motor R_arms(vex::PORT6);
 vex::motor L_arms(vex::PORT16, true);
 
-vex::motor Lift(vex::PORT9,true);
+vex::motor Lift(vex::PORT9, true);
 
 vex::motor R_intake(vex::PORT18);
 vex::motor L_intake(vex::PORT19);

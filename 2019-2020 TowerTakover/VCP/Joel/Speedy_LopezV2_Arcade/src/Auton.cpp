@@ -69,13 +69,7 @@ void AStraight(double distanceR, double speedRpm)
 void Foward(double inches)  //inches
 {
     double distance = DegPerInch(inches);
-    if(Right2.rotation(vex::rotationUnits::deg)<distance )
-    {
-    RightMotor(300); //distance
-    LeftMotor(300);
-    //task::sleep(1000);
-    }
-    task::sleep(1000);
-
+    RightMotor(distance); //distance
+    LeftMotor(distance);
 }
 

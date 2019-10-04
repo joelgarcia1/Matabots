@@ -2,7 +2,7 @@
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
 /*    Author:       joelgarcia                                                */
-/*    Created:      Fri Jul 19 2019    //Updated 10/03/19                                       */
+/*    Created:      Fri Jul 19 2019                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -49,8 +49,7 @@ void pre_auton( ) {
 
 void autonomous(  ) {
 
-Foward(50);
-Foward(-50);
+Foward(3);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -70,20 +69,19 @@ void usercontrol(  ) {
     //Brain.Screen.clearScreen();
      //Brain.Screen.printAt(1, 40, " Welcome Back Mr.Stark");
     //Brain.Screen.printAt( 1,  80, "timer: %f", Brain.timer(vex::timeUnits::sec));
-    Brain.Screen.printAt( 1,  120, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
+    Brain.Screen.printAt( 1,  120, "rotation: %f", Lift.rotation(vex::rotationUnits::rev));
    
    Drive();
    Arms();
    lift();
 
-   if(Controller.ButtonY.pressing())
+   if(Controller.ButtonY.pressing() != 0)
    {
-  Lift_setTo();
+     Lift_setTo();
+   //Foward();
+   //vex::task::sleep(1000);
+   //Gyro_Move();
 
-  }
-  if(Controller.ButtonX.pressing())
-  {
-    Reset_Lift();
   }
 }
   

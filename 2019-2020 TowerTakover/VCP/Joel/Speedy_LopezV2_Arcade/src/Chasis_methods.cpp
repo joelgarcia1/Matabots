@@ -5,7 +5,7 @@
 
 void Drive()
 {
-  
+  /*
   Right1.spin(vex::directionType::fwd, Controller.Axis2.value(), vex::velocityUnits::pct);
   Right2.spin(vex::directionType::fwd, Controller.Axis2.value(), vex::velocityUnits::pct);
   Right3.spin(vex::directionType::fwd, Controller.Axis2.value(), vex::velocityUnits::pct);
@@ -15,11 +15,74 @@ void Drive()
   Left2.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
   Left3.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
   Left4.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
+  */
+
+  
+  //Arcade two joySticks
+while(abs(Controller.Axis3.value()) && abs(Controller.Axis1.value()))
+{
+
+  Left1.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
   
 
-  /*
-  //One joystick Arcade
+  Right1.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right2.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right3.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right4.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  
+}
 
+//Foward Drive
+if(Controller.Axis3.value())//10 = deadzone
+  {
+     //Left1.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
+  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
+  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
+  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
+  
+
+  //Right1.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
+  Right2.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
+  Right3.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
+  Right4.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
+  
+  }
+  //Left and Right
+  else if (Controller.Axis1.value())
+   {
+  Left1.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
+  
+
+  Right1.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right2.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right3.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  Right4.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
+  
+  }
+  //Turns off motors
+  else
+  {
+  Left1.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
+  Left2.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
+  Left3.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
+  Left4.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
+  
+
+  Right1.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+  Right2.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+  Right3.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+  Right4.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
+ 
+  }
+
+  //One joystick Arcade
+/*
 while(abs(Controller.Axis2.value()) && abs(Controller.Axis1.value()))
 {
 
@@ -83,18 +146,19 @@ if(Controller.Axis2.value())//10 = deadzone
   }
 */
 
+
   //intake
   if(Controller.ButtonR1.pressing())
   {
-    R_intake.spin(vex::directionType::rev, 90, vex::percentUnits::pct);
-    L_intake.spin(vex::directionType::fwd, 90, vex::percentUnits::pct);
+    R_intake.spin(vex::directionType::rev, 100, vex::percentUnits::pct);
+    L_intake.spin(vex::directionType::fwd, 100, vex::percentUnits::pct);
   }
   
 
   else if(Controller.ButtonR2.pressing())
   {
-    R_intake.spin(vex::directionType::fwd, 90, vex::percentUnits::pct);
-    L_intake.spin(vex::directionType::rev, 90, vex::percentUnits::pct);
+    R_intake.spin(vex::directionType::fwd, 80, vex::percentUnits::pct);
+    L_intake.spin(vex::directionType::rev, 80, vex::percentUnits::pct);
   } 
 
   else 
@@ -140,75 +204,12 @@ else if(Controller.ButtonB.pressing())
   Lift.spin(vex::directionType::rev, 80, vex::velocityUnits::pct);
 }
 else {
-Lift.stop(vex::brakeType::brake);
+Lift.stop();
 }
 }
 
 
-/*
-  //Arcade two joySticks
-while(abs(Controller.Axis3.value()) && abs(Controller.Axis1.value()))
-{
 
-  Left1.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-
-  Right1.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right2.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right3.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right4.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-}
-
-//Foward Drive
-if(Controller.Axis3.value())//10 = deadzone
-  {
-     Left1.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
-  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
-  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
-  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::fwd, Controller.Axis3.value() , vex::velocityUnits::pct);
-
-  Right1.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
-  Right2.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
-  Right3.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
-  Right4.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::fwd, Controller.Axis3.value(), vex::velocityUnits::pct);
-  }
-  //Left and Right
-  else if (Controller.Axis1.value())
-   {
-  Left1.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left2.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left3.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left4.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::fwd, Controller.Axis3.value() + Controller.Axis1.value(), vex::velocityUnits::pct);
-
-  Right1.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right2.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right3.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right4.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::fwd, Controller.Axis3.value() - Controller.Axis1.value(), vex::velocityUnits::pct);
-  }
-  //Turns off motors
-  else
-  {
-  Left1.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
-  Left2.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
-  Left3.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
-  Left4.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
-  Left5.spin(vex::directionType::fwd, 0 , vex::velocityUnits::pct);
-
-  Right1.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
-  Right2.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
-  Right3.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
-  Right4.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
-  Right5.spin(vex::directionType::fwd, 0, vex::velocityUnits::pct);
-  }
-*/
 
 
 
@@ -283,18 +284,10 @@ void Lift_setTo()
   }
 }
 
-void Reset_Lift()
-{
-  while(Lift.rotation(vex::rotationUnits::deg) > 0)
-  {
-    Lift.spin(vex::directionType::rev, 70, vex::velocityUnits::pct);
-    
-    Drive();
-    Arms();
 
-  }
-}
+//void Reset_Lift()
+//{
 
-
+//}
 
 
