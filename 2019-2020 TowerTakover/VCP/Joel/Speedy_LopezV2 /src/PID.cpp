@@ -116,7 +116,7 @@ void PI_straight(double target_i) //target set too
   move_baseR(speed_R);
   //move_baseL(speed_L);
   
-  //previous_tL = current_tL;
+  previous_tL = current_t;
   //target_i = errorL;
   vex::task::sleep(40);
     }

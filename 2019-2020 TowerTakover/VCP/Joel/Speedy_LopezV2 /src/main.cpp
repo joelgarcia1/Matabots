@@ -67,22 +67,24 @@ void usercontrol(  ) {
   // User control code here, inside the loop
   while (true) {
 
-    Brain.Screen.clearScreen();
-    Brain.Screen.printAt( 1,  40, "timer: %f", Brain.timer(vex::timeUnits::sec));
-    Brain.Screen.printAt( 1,  80, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
+    //Brain.Screen.clearScreen();
+     //Brain.Screen.printAt(1, 40, " Welcome Back Mr.Stark");
+    //Brain.Screen.printAt( 1,  80, "timer: %f", Brain.timer(vex::timeUnits::sec));
+    Brain.Screen.printAt( 1,  120, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
+   
    Drive();
-   //Arms();
-   //lift();
+   Arms();
+   lift();
 
-   /*if(Controller.ButtonY.pressing())
+   if(Controller.ButtonY.pressing())
    {
-     PI_straight(12);
    //Foward();
    //vex::task::sleep(1000);
    //Gyro_Move();
 
   }
-  */
+}
+  
      
 
     // This is the main execution loop for the user control program.
