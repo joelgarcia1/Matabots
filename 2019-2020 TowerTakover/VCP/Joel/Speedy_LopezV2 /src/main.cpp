@@ -1,81 +1,75 @@
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*    Module:       main.cpp                                                  */
-/*    Author:       joelgarcia                                                */
-/*    Created:      Fri Jul 19 2019    //Updated 10/03/19                                       */
-/*    Description:  V5 project                                                */
-/*                                                                            */
+
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
 #include "vex_units.h"
-#include <Chasis_methods.h>
 #include <PID.h>
 
-using namespace vex;
 
-// A global instance of vex::brain used for printing to the V5 brain screen
-
-// A global instance of vex::competition
-
-
-// define your global instances of motors and other devices here
-
-
-/*---------------------------------------------------------------------------*/
-/*                          Pre-Autonomous Functions                         */
-/*                                                                           */
-/*  You may want to perform some actions before the competition starts.      */
-/*  Do them in the following function.  You must return from this function   */
-/*  or the autonomous and usercontrol tasks will not be started.  This       */
-/*  function is only called once after the cortex has been powered on and    */ 
-/*  not every time that the robot is disabled.                               */
-/*---------------------------------------------------------------------------*/
-
-void pre_auton( ) {
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
-  
-}
-
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*                              Autonomous Task                              */
-/*                                                                           */
-/*  This task is used to control your robot during the autonomous phase of   */
-/*  a VEX Competition.                                                       */
-/*                                                                           */
-/*  You must modify the code to add your own robot specific commands here.   */
-/*---------------------------------------------------------------------------*/
-
+ using namespace vex;
+// 
+// // A global instance of vex::brain used for printing to the V5 brain screen
+vex::brain Brain;
+// // A global instance of vex::competition
+// 
+// 
+// // define your global instances of motors and other devices here
+// 
+// 
+// /*---------------------------------------------------------------------------*/
+// /*                          Pre-Autonomous Functions                         */
+// /*                                                                           */
+// /*  You may want to perform some actions before the competition starts.      */
+// /*  Do them in the following function.  You must return from this function   */
+// /*  or the autonomous and usercontrol tasks will not be started.  This       */
+// /*  function is only called once after the cortex has been powered on and    */ 
+// /*  not every time that the robot is disabled.                               */
+// /*---------------------------------------------------------------------------*/
+// 
+ void pre_auton( ) {
+//   // All activities that occur before the competition starts
+//   // Example: clearing encoders, setting servo positions, ...
+//   
+ }
+// 
+// /*---------------------------------------------------------------------------*/
+// /*                                                                           */
+// /*                              Autonomous Task                              */
+// /*                                                                           */
+// /*  This task is used to control your robot during the autonomous phase of   */
+// /*  a VEX Competition.                                                       */
+// /*                                                                           */
+// /*  You must modify the code to add your own robot specific commands here.   */
+// /*---------------------------------------------------------------------------*/
+// 
 void autonomous(  ) {
 
-Foward(50);
-Foward(-50);
+Gyro_Move(180);
 }
-
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*                              User Control Task                            */
-/*                                                                           */
-/*  This task is used to control your robot during the user control phase of */
-/*  a VEX Competition.                                                       */
-/*                                                                           */
-/*  You must modify the code to add your own robot specific commands here.   */
-/*---------------------------------------------------------------------------*/
-
-void usercontrol(  ) {
-  // User control code here, inside the loop
+// 
+// /*---------------------------------------------------------------------------*/
+// /*                                                                           */
+// /*                              User Control Task                            */
+// /*                                                                           */
+// /*  This task is used to control your robot during the user control phase of */
+// /*  a VEX Competition.                                                       */
+// /*                                                                           */
+// /*  You must modify the code to add your own robot specific commands here.   */
+// /*---------------------------------------------------------------------------*/
+// 
+ void usercontrol(  ) {
+//   // User control code here, inside the loop
   while (true) {
 
-    //Brain.Screen.clearScreen();
-     //Brain.Screen.printAt(1, 40, " Welcome Back Mr.Stark");
-    //Brain.Screen.printAt( 1,  80, "timer: %f", Brain.timer(vex::timeUnits::sec));
+    Brain.Screen.clearScreen();
+     Brain.Screen.printAt(1, 40, " Welcome Back Mr.Stark");
+    Brain.Screen.printAt( 1,  80, "timer: %f", Brain.timer(timeUnits::sec));
     Brain.Screen.printAt( 1,  120, "rotation: %f", Left1.rotation(vex::rotationUnits::rev));
+    Brain.Screen.printAt(40, 40, "gyro: %f", Gyro.value(vex::rotationUnits::deg));
    
    Drive();
    Arms();
    lift();
-
+  
    if(Controller.ButtonY.pressing())
    {
   Lift_setTo();
@@ -85,37 +79,57 @@ void usercontrol(  ) {
   {
     Reset_Lift();
   }
-}
-  
-     
 
-    // This is the main execution loop for the user control program.
-    // Each time through the loop your program should update motor + servo 
-    // values based on feedback from the joysticks.
+ }
+//   
+//      
+// 
+//     // This is the main execution loop for the user control program.
+//     // Each time through the loop your program should update motor + servo 
+//     // values based on feedback from the joysticks.
+// 
+//     // ........................................................................
+//     // Insert user code here. This is where you use the joystick values to 
+//     // update your motors, etc.
+//     // ........................................................................
+//  
+     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
+   }
+// 
+// 
+// //
+// // Main will set up the competition functions and callbacks.
+// //
 
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to 
-    // update your motors, etc.
-    // ........................................................................
- 
-    vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
-  }
+// ---- END VEXCODE CONFIGURED DEVICES ----
 
 
-//
-// Main will set up the competition functions and callbacks.
-//
+
 int main() {
-    //Set up callbacks for autonomous and driver control periods.
-    Competition.autonomous( autonomous );
-    Competition.drivercontrol( usercontrol );
-    
-    //Run the pre-autonomous function. 
-    pre_auton();
-       
-    //Prevent main from exiting with an infinite loop.                        
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  
+  //     //Set up callbacks for autonomous and driver control periods.
+     Competition.autonomous( autonomous );
+     Competition.drivercontrol( usercontrol );
+//     
+//     //Run the pre-autonomous function. 
+//     pre_auton();
+//        
+//     //Prevent main from exiting with an infinite loop.                        
     while(true) {
+      
       vex::task::sleep(100);//Sleep the task for a short amount of time to prevent wasted resources.
-    }    
-       
+    }   
 }
+
+// /*----------------------------------------------------------------------------*/
+// /*                                                                            */
+// /*    Module:       main.cpp                                                  */
+// /*    Author:       joelgarcia                                                */
+// /*    Created:      Fri Jul 19 2019    //Updated 10/03/19                                       */
+// /*    Description:  V5 project                                                */
+// /*                                                                            */
+// /*----------------------------------------------------------------------------*/
+// #include "vex.h"
+// 
+// // ---- START VEXCODE CONFIGURED DEVICES ----

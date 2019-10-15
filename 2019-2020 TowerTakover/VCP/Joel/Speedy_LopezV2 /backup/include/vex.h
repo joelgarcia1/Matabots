@@ -23,10 +23,4 @@
 // my methds
 #include "Cortex_layout.h"
 #include "Chasis_methods.h"
-#include "Manipulator_method.h" 
 #include "Auton.h"
-
-
-
-
-

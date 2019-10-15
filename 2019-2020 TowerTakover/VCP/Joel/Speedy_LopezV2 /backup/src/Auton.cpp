@@ -5,6 +5,8 @@
 #include <Cortex_layout.h>
 #include <PID.h>
 
+using namespace vex;
+
 
 const double diameter = 12; // Diameter (in inches)
 const double pi = 22/7; // 3.14
@@ -50,7 +52,7 @@ void Auton_Strat()
 void AStraight(double distanceR, double speedRpm)
 {
    
-  while(distanceR<Right1.rotation(vex::rotationUnits::rev)){
+  while(distanceR<Right1.rotation(rotationUnits::rev)){
     Right1.spin(vex::directionType::fwd,speedRpm,vex::velocityUnits::rpm);
     Right2.spin(vex::directionType::fwd,speedRpm,vex::velocityUnits::rpm);
     Right3.spin(vex::directionType::fwd,speedRpm,vex::velocityUnits::rpm);
@@ -73,7 +75,7 @@ void Foward(double inches)  //inches
     LeftMotor(300);
     //task::sleep(1000);
     }
-    vex::task::sleep(1000);
+    task::sleep(1000);
 
 }
 

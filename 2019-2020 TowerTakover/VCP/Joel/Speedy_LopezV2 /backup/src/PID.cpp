@@ -76,10 +76,10 @@ void move_baseL(double speed)
 
 //void Current_Enc ()
 //{
-//Right1.rotateFor(0,rotationUnits::deg);
-//Right2.rotateFor(0,rotationUnits::deg);
-//Right3.rotateFor(0,rotationUnits::deg);
-//Right4.rotateFor(0,rotationUnits::deg);
+//Right1.rotateFor(0,vex::rotationUnits::deg);
+//Right2.rotateFor(0,vex::rotationUnits::deg);
+//Right3.rotateFor(0,vex::rotationUnits::deg);
+//Right4.rotateFor(0,vex::rotationUnits::deg);
 //}
 
 double InchPerTicks(double inch)

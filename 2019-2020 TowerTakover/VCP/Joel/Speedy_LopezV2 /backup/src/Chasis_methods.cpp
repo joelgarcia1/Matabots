@@ -3,7 +3,6 @@
 #include "vex_units.h"
 #include <Cortex_layout.h>
 
-
 void Drive()
 {
   
@@ -223,7 +222,7 @@ void Gyro_Move(double degree)
 //{
 
   //           ADD a Tolerance             
-  if(Gyro.value(vex::rotationUnits::deg) < degree ) //Goes right
+  if(Gyro.value(vex::rotationUnits::deg) <= degree ) //Goes right
   {
   Left1.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
   Left2.spin(vex::directionType::fwd, 30 , vex::velocityUnits::pct);
@@ -238,7 +237,7 @@ void Gyro_Move(double degree)
 
   }
   
-   else if(Gyro.value(vex::rotationUnits::deg) > degree )
+   else if(Gyro.value(vex::rotationUnits::deg) >= degree )
      {
   Left1.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);
   Left2.spin(vex::directionType::rev, 30 , vex::velocityUnits::pct);

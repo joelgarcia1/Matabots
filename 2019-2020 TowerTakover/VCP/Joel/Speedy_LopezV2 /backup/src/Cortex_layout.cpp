@@ -2,13 +2,15 @@
 
 #include "vex.h"
 
-// A global instance of vex::brain used for printing to the V5 brain screen
+using namespace vex;
 
+// A global instance of vex::brain used for printing to the V5 brain screen
+vex::brain Brain;
 // A global instance of vex::competition
 vex::competition Competition;
 
 
-vex::controller Controller = vex::controller(); 
+vex:: controller Controller = vex::controller(); 
 vex::motor Right1(vex::PORT1,true);
 vex::motor Right2(vex::PORT2);
 vex::motor Right3(vex::PORT3,true);
@@ -31,5 +33,5 @@ vex::motor L_intake(vex::PORT19);
 
 
 
-vex::gyro Gyro = vex::gyro(Brain.ThreeWirePort.B);
+vex::gyro Gyro = gyro(Brain.ThreeWirePort.C);
 
