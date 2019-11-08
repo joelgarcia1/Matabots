@@ -4,8 +4,9 @@ CSUN2 was the CSUN Matabots' second team.
 
 This team had members that were either new or had some experience with VEX Robotics.
 
-Our team, with some assistance from our Veterans, was able to qualify for World's at the 2019 Southwest VEX U Regional 
-Qualifying Tournament in Arizona.
+Our team, with some assistance from our Veterans, was able to qualify for World's at the 2019 Southwest VEX U Regional Qualifying Tournament in Arizona.
 
-Above (or below) is the code that was created by our programmers: Joshua Poblete & Sangat "Sunny" Shah), and used at the 
-2019 VEX U World's Competition in Kentucky.
+Above (or below) is the code that was created by our programmers: Joshua Poblete & Sangat "Sunny" Shah), and used at the 2019 VEX U World's Competition in Kentucky.
+
+Sangat worked mainly on the CSUN2 Big Bot (Ash)
+Joshua worked mainly on the CSUN2 Small Bot (Pikachu)
